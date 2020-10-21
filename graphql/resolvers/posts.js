@@ -30,6 +30,15 @@ module.exports = {
       // if user is not auhtorized exception will be thrown
       const user = checkAuth(context);
 
+      // validate
+      if (body.trim() === '') {
+        throw new UserInputError('Post must not be empty', {
+          errors: {
+            body: 'Post body required',
+          },
+        });
+      }
+
       // create the post
       const newpost = new Post({
         body,
