@@ -1,14 +1,45 @@
 const Post = require('../../models/Post');
+const checkAuth = require('../../utils/checkAuth');
 
 module.exports = {
-    Query: {
-        async getPosts() {
-            try {
-                const posts = await Post.find({});
-                return posts;
-            } catch (err) {
-                throw new Error(err);
-            }
+  Query: {
+    async getPosts() {
+      try {
+        const posts = await Post.find({});
+        return posts;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+    async getPost(_, { postId }) {
+      try {
+        const post = await Post.findById(postId);
+        if (!post) {
+          throw new Error('Post not found');
         }
-    }
-}
+        return post;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+  },
+  Mutation: {
+    async createPost(_, { body }, context) {
+      // check authorization first
+      // if user is not auhtorized exception will be thrown
+      const user = checkAuth(context);
+
+      // create the post
+      const newpost = new Post({
+        body,
+        user: user.id,
+        username: user.username,
+        createdAt: new Date().toISOString(),
+      });
+
+      const post = await newpost.save();
+
+      return post;
+    },
+  },
+};
