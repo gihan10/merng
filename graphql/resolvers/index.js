@@ -3,6 +3,11 @@ const usersResolvers = require('./users');
 const commentResolvers = require('./comments');
 
 module.exports = {
+  // Post modifier
+  Post: {
+    likesCount: (parent) => parent.likes.length,
+    commentsCount: (parent) => parent.comments.length,
+  },
   Query: {
     ...postsResolvers.Query,
   },
@@ -13,5 +18,5 @@ module.exports = {
   },
   Subscription: {
     ...postsResolvers.Subscription,
-  }
+  },
 };
