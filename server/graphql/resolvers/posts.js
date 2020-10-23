@@ -34,7 +34,7 @@ module.exports = {
       if (body.trim() === '') {
         throw new UserInputError('Post must not be empty', {
           errors: {
-            body: 'Post body required',
+            body: ['Post body required'],
           },
         });
       }
