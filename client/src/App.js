@@ -5,6 +5,8 @@ import { Layout } from 'antd';
 
 import './App.css';
 
+import { AuthProvider } from './context/auth';
+
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -15,23 +17,25 @@ const { Content } = Layout;
 
 function App() {
   return (
-    <Layout>
-      <Router>
+    <AuthProvider>
+      <Layout>
+        <Router>
           <MenuBar />
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-          }}
-        >
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-        </Content>
-      </Router>
-    </Layout>
+          <Content
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+            }}
+            >
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+          </Content>
+        </Router>
+      </Layout>
+    </AuthProvider>
   );
 }
 

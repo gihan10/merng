@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Input, Button } from 'antd';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 
+import { AuthContext } from '../context/auth';
+
 function Register() {
     const [form] = Form.useForm();
     const history = useHistory();
+    const context = useContext(AuthContext);
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed: ', errorInfo);
-    }
     const [ addUser, { loading }] = useMutation(REGISTER_USER, {
-        update(proxy, result) {
+        update(proxy, { data: { register: userData }}) {
             // @todo store auth token
+            context.login(userData);
             history.push('/');
         },
         onError(err) {
@@ -41,7 +42,6 @@ function Register() {
     }
     
     const onFinish = (values) => {
-        console.log('Success');
         handleSubmit(values);
     }
 
@@ -51,7 +51,6 @@ function Register() {
             <Form
                 name="register"
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 form={form}
             >
                 <Form.Item

@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Input, Button } from 'antd';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 
+import { AuthContext } from '../context/auth';
+
 function Login() {
     const [form] = Form.useForm();
     const history = useHistory();
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed: ', errorInfo);
-    }
+    const context = useContext(AuthContext);
+    
     const [ loginUser, { loading }] = useMutation(LOGIN_USER, {
-        update(proxy, result) {
-            // @todo store auth token
+        update(proxy, { data: { login: userData }}) {
+            
+            context.login(userData);
             history.push('/');
         },
         onError(err) {
@@ -41,7 +43,6 @@ function Login() {
     }
     
     const onFinish = (values) => {
-        console.log('Success');
         handleSubmit(values);
     }
 
@@ -51,7 +52,6 @@ function Login() {
             <Form
                 name="login"
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 form={form}
             >
                 <Form.Item
@@ -88,6 +88,9 @@ mutation login(
         username: $username
         password: $password
     ) {
+        id
+        username
+        email
         token
     }
 }
