@@ -1,35 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Button } from 'antd';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 
 function Register() {
+    const [form] = Form.useForm();
     const onFinishFailed = (errorInfo) => {
         console.log('Failed: ', errorInfo);
     }
-    const [ values, setValues ] = useState({
-        username: '',
-        password: '',
-        email: '',
-        confirmPassword: '',
-    })
     const [ addUser, { loading }] = useMutation(REGISTER_USER, {
         update(proxy, result) {
             console.log('result', result);
         },
-        variables: values
+        onError(err) {
+            err.graphQLErrors.forEach(apolloError => {
+                const { code, errors } = apolloError.extensions;
+                if (code === 'BAD_USER_INPUT') {
+                    const fieldData = Object.keys(errors).map((key) => {
+                        return {
+                            name: key,
+                            errors: errors[key],
+                        }
+                    });
+                    form.setFields(fieldData);
+                }
+            })
+        },
     });
 
-    const handleSubmit = (values) => {
-        try {
-            const { data } = addUser({
-                variables: {
-                    ...values,
-                },
-            })
-        } catch (err) {
-            console.log('Error', err);
-        }
+    const handleSubmit = async (values) => {
+        await addUser({
+            variables: {
+                ...values,
+            },
+        });
     }
     
     const onFinish = (values) => {
@@ -44,6 +48,7 @@ function Register() {
                 name="register"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
+                form={form}
             >
                 <Form.Item
                     label="Email"
