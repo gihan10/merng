@@ -13,6 +13,8 @@ import Register from './components/Register';
 
 import MenuBar from './components/MenuBar';
 
+import AuthRoute from './components/AuthRoute';
+
 const { Content } = Layout;
 
 function App() {
@@ -30,8 +32,8 @@ function App() {
             }}
             >
             <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            <AuthRoute exact path="/login" component={Login} />
+            <AuthRoute exact path="/register" component={Register} />
           </Content>
         </Router>
       </Layout>
