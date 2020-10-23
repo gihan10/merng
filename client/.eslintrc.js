@@ -10,6 +10,7 @@ module.exports = {
       'eslint-plugin-react',
       'eslint-plugin-react-hooks',
       'eslint-plugin-jsx-a11y',
+      'prettier',
     ],
     parserOptions: {
       ecmaVersion: 12,
