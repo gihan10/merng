@@ -81,6 +81,8 @@ module.exports = {
 
       if (!user) {
         errors.general = 'User not found';
+        errors.username = errors.username || [];
+        errors.username.push('User not found');
         throw new UserInputError('User not found', { errors });
       }
 
@@ -88,6 +90,8 @@ module.exports = {
 
       if (!match) {
         errors.general = ['Wrong credentials'];
+        errors.password = errors.password || [];
+        errors.password.push('Wrong credentials')
         throw new UserInputError('Wrong credentials', { errors });
       }
 
