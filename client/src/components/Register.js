@@ -2,15 +2,19 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 
 function Register() {
     const [form] = Form.useForm();
+    const history = useHistory();
+
     const onFinishFailed = (errorInfo) => {
         console.log('Failed: ', errorInfo);
     }
     const [ addUser, { loading }] = useMutation(REGISTER_USER, {
         update(proxy, result) {
-            console.log('result', result);
+            // @todo store auth token
+            history.push('/');
         },
         onError(err) {
             err.graphQLErrors.forEach(apolloError => {
