@@ -63,6 +63,11 @@ module.exports = {
       try {
         const post = await Post.findById(postId);
 
+        // verify posts exists
+        if (!post) {
+          throw new UserInputError('Unable to find the post');
+        }
+
         // is owner deleting the post?
         if (post.username !== user.username) {
           throw new AuthenticationError('Action not allowed');
