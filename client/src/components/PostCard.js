@@ -1,9 +1,13 @@
-import React, { createElement, useState } from 'react';
+import React, { createElement, useState, useContext } from 'react';
 import { Comment } from 'antd';
 import { UserOutlined, LikeFilled, LikeOutlined, CommentOutlined } from '@ant-design/icons';
+import { AuthContext } from '../context/auth';
+import DeletePostButton from './DeletePostButton';
 
 function PostCard(props) {
-    const { post: { body, username, likesCount, commentsCount, createdAt } } = props;
+    const { user } = useContext(AuthContext);
+    const { post } = props;
+    const { body, username, likesCount, commentsCount, createdAt } = post;
 
     const [likes, setLikes] = useState(likesCount);
     const [action, setAction] = useState(null);
@@ -27,6 +31,9 @@ function PostCard(props) {
                 <CommentOutlined />
                 {' '}<span className="comment-action">{commentsCount}</span>
             </span>
+            { user && user.username === username && (
+                <DeletePostButton post={post} />
+            )}
         </>
     ]
 
