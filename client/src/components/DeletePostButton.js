@@ -3,13 +3,16 @@ import { Modal } from 'antd';
 import { DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { gql, useMutation } from '@apollo/client';
 
-function DeletePostButton({ post }) {
+function DeletePostButton({ post, callback }) {
     const [deletePost] = useMutation(DELETE_POST_MUTATION, {
-        update(cache, result) {
+        update(cache) {
             // modify the apollo cache to remove deleted post.
             cache.evict({
                 id: cache.identify(post)
             });
+            if (callback) {
+                callback();
+            }
         },
         onError(err) {
             console.log('err', err);

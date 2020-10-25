@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Card, Comment } from "antd";
 import {
   UserOutlined,
   CommentOutlined,
-  DeleteOutlined,
 } from "@ant-design/icons";
 import { AuthContext } from "../context/auth";
 import DeletePostButton from "./DeletePostButton";
@@ -14,6 +13,7 @@ import LikeButton from "./LikeButton";
 function SinglePost(props) {
   const { postId } = useParams();
   const { user } = useContext(AuthContext);
+  const history = useHistory();
   const { loading, data: { getPost: post } = {} } = useQuery(FETCH_POST_QUERY, {
     variables: {
       postId,
@@ -44,7 +44,10 @@ function SinglePost(props) {
 
   const actions = [];
   if (user && user.username === post.username) {
-    actions.push(<DeletePostButton key="setting" post={post} />);
+    actions.push(<DeletePostButton key="setting" post={post} callback={() => {
+        // redirect to home page after deletion
+        history.push('/');
+    }} />);
   }
 
   return (
