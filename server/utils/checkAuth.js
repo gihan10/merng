@@ -7,7 +7,7 @@ module.exports = (context) => {
   // extract the authorization header from request headers
   const authHeader = context.req.headers.authorization;
   if (!authHeader) {
-    throw new Error('Authorization header is required');
+    throw new AuthenticationError('Authorization header is required');
   }
 
   // extract the Bearer token
