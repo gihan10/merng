@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Comment } from 'antd';
 import { UserOutlined, CommentOutlined } from '@ant-design/icons';
 import { AuthContext } from '../context/auth';
@@ -34,7 +35,7 @@ function PostCard(props) {
             author={username}
             content={
                 <>
-                    <p>{body}</p>
+                    <Link to={`/post/${id}`}>{body}</Link>
                 </>
             }
             datetime={
