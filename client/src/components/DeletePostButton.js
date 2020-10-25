@@ -1,5 +1,6 @@
 import React from 'react';
-import { DeleteOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
+import { DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { gql, useMutation } from '@apollo/client';
 
 function DeletePostButton({ post }) {
@@ -16,12 +17,19 @@ function DeletePostButton({ post }) {
         }
     });
 
-    const onClick = async () => {
-        await deletePost({
-            variables: {
-                postId: post.id
-            },
-        });
+    const onClick = () => {
+        Modal.confirm({
+            title: 'Confirm',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Are you sure you want to delete this post?',
+            onOk: () => {
+                deletePost({
+                    variables: {
+                        postId: post.id
+                    },
+                });
+            }
+        })
     }
 
     return (
