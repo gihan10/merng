@@ -1,21 +1,14 @@
-import React, { createElement, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Comment } from 'antd';
-import { UserOutlined, LikeFilled, LikeOutlined, CommentOutlined } from '@ant-design/icons';
+import { UserOutlined, CommentOutlined } from '@ant-design/icons';
 import { AuthContext } from '../context/auth';
 import DeletePostButton from './DeletePostButton';
+import LikeButton from './LikeButton';
 
 function PostCard(props) {
     const { user } = useContext(AuthContext);
     const { post } = props;
-    const { body, username, likesCount, commentsCount, createdAt } = post;
-
-    const [likes, setLikes] = useState(likesCount);
-    const [action, setAction] = useState(null);
-
-    const like = () => {
-        setLikes(1);
-        setAction('like');
-    }
+    const { id, body, username, likes, likesCount, commentsCount, createdAt } = post;
 
     const comment = () => {
 
@@ -23,10 +16,7 @@ function PostCard(props) {
 
     const actions = [
         <>
-            <span onClick={like}>
-                {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
-                {' '}<span className="comment-action">{likes}</span>
-            </span>
+            <LikeButton user={user} post={{ id, likesCount, likes }} />
             <span onClick={comment}>
                 <CommentOutlined />
                 {' '}<span className="comment-action">{commentsCount}</span>
