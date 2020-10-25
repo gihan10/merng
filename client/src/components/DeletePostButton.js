@@ -3,10 +3,10 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { gql, useMutation } from '@apollo/client';
 
 function DeletePostButton({ post }) {
-    const [deletePost, { loading }] = useMutation(DELETE_POST_MUTATION, {
+    const [deletePost] = useMutation(DELETE_POST_MUTATION, {
         update(cache, result) {
             // modify the apollo cache to remove deleted post.
-            const res = cache.evict({
+            cache.evict({
                 id: cache.identify(post)
             });
         },
