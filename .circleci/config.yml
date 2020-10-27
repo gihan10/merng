@@ -1,8 +1,13 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
+jobs:
+  build:
+    docker:
+      - image: 'cimg/node:14.14.0'
+    steps:
+      - run: cd client && npm i
+      - run: cd client && npm run build
 workflows:
   node-tests:
     jobs:
-      - node/test
+      - build
 
