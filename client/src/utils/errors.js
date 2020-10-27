@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { Modal } from "antd";
 
 export function handleError(err) {

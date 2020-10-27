@@ -19,5 +19,6 @@ mongoose
   })
   .then(() => server.listen({ port }))
   .then((res) => {
+    // eslint-disable-next-line no-console
     console.log(`server is running at ${res.url}`);
   });
