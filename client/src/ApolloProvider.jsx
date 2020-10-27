@@ -30,8 +30,6 @@ const errorLink = onError(({ networkError, operation, forward }) => {
   forward(operation);
 });
 
-// eslint-disable-next-line no-console
-console.log("url", process.env.REACT_APP_SERVER_URI);
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_SERVER_URI,
 });

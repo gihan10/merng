@@ -43,8 +43,8 @@ You can signup for MongoDB Atlas Cloud [free tier](https://www.mongodb.com/prici
         - `cd ./server`
         - `npm i`
     2. Configure server
-        1. Rename `server/config.js.sample` file to `server/config.js`
-        2. Update variables in the `server/config.js`
+        1. Rename `server/.env.sample` file to `server/.env`
+        2. Update variables in the `server/.env`
     3. Start the server
         - `npm run serve`
         - For development purpose `npm run start` is available with `nodemon` server.

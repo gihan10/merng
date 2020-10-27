@@ -1,7 +1,8 @@
 const { ApolloServer, PubSub } = require('apollo-server');
 const mongoose = require('mongoose');
+// load configurations
+require('dotenv').config();
 
-const { mongodb, port } = require('./config');
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
@@ -13,11 +14,11 @@ const server = new ApolloServer({
 });
 
 mongoose
-  .connect(mongodb, {
+  .connect(process.env.mongodb, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => server.listen({ port }))
+  .then(() => server.listen({ port: process.env.port }))
   .then((res) => {
     // eslint-disable-next-line no-console
     console.log(`server is running at ${res.url}`);

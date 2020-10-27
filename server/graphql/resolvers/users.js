@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const { UserInputError } = require('apollo-server');
 
 const User = require('../../models/User');
-const { secretKey } = require('../../config');
 const {
   validateRegisterInput,
   validateLoginInput,
@@ -95,7 +94,7 @@ module.exports = {
         throw new UserInputError('Wrong credentials', { errors });
       }
 
-      const token = generateToken(user, secretKey);
+      const token = generateToken(user, process.env.secretKey);
       return {
         ...user._doc,
         id: user.id,
