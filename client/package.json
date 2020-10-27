@@ -13,8 +13,8 @@
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "jwt-decode": "^3.0.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^2.2.2",
     "react-scripts": "4.0.0"
