@@ -5,6 +5,7 @@ import { UserOutlined, CommentOutlined } from '@ant-design/icons';
 import { AuthContext } from '../context/auth';
 import DeletePostButton from './DeletePostButton';
 import LikeButton from './LikeButton';
+import { HashLink } from 'react-router-hash-link';
 
 function PostCard(props) {
     const { user } = useContext(AuthContext);
@@ -19,8 +20,10 @@ function PostCard(props) {
         <>
             <LikeButton user={user} post={{ id, likesCount, likes }} />
             <span onClick={comment}>
+                <HashLink to={`/post/${id}#comments`}>
                 <CommentOutlined />
                 {' '}<span className="comment-action">{commentsCount}</span>
+                </HashLink>
             </span>
             { user && user.username === username && (
                 <DeletePostButton post={post} />

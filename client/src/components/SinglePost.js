@@ -74,7 +74,7 @@ function SinglePost() {
           <LikeButton user={user} post={post} /> <CommentOutlined />{" "}
           {post.commentsCount}
         </div>
-        <h3 style={{ marginTop: "2rem" }}>Comments ({post.commentsCount})</h3>
+        <h3 style={{ marginTop: "2rem" }} id="comments">Comments ({post.commentsCount})</h3>
         {user && <CommentForm postId={postId} />}
         {post.comments.length > 0 && (
           <>
