@@ -5,7 +5,6 @@ import {
   ApolloProvider,
   ApolloLink,
   HttpLink,
-  concat,
 } from "@apollo/client";
 import { onError } from "apollo-link-error";
 
@@ -22,13 +21,14 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-// const errorLink = onError(({ networkError }) => {
-//   // handle network errors here
-//   if (networkError) {
-//     // eslint-disable-next-line no-console
-//     console.log(`[Network error]: ${networkError}`);
-//   }
-// });
+const errorLink = onError(({ networkError, operation, forward }) => {
+  // handle network errors here
+  if (networkError) {
+    // eslint-disable-next-line no-console
+    console.log(`[Network error]: ${networkError}`);
+  }
+  forward(operation);
+});
 
 // eslint-disable-next-line no-console
 console.log("url", process.env.REACT_APP_SERVER_URI);
@@ -37,7 +37,7 @@ const httpLink = new HttpLink({
 });
 
 const client = new ApolloClient({
-  link: concat(authLink, httpLink),
+  link: ApolloLink.from([errorLink, authLink, httpLink]),
   cache: new InMemoryCache(),
 });
 
