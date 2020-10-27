@@ -4,7 +4,7 @@ A simple tweet application to demonstrate and exercise #MERNG stack. Authorized 
 
 ## Build status
 
-[![gihan10](https://circleci.com/gh/gihan10/merng.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+[![gihan10](https://circleci.com/gh/gihan10/merng.svg?style=shield)](https://circleci.com/gh/gihan10/merng)
 
 ## Code style
 
