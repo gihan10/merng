@@ -7,6 +7,7 @@ import {
   HttpLink,
   concat,
 } from "@apollo/client";
+import { onError } from 'apollo-link-error';
 
 import App from "./App";
 
@@ -23,12 +24,19 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
+const errorLink = onError(({ networkError }) => {
+  // handle network errors here
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`);
+  }
+});
+
 const httpLink = new HttpLink({
   uri: "http://localhost:5000",
 });
 
 const client = new ApolloClient({
-  link: concat(authLink, httpLink),
+  link: concat(errorLink, authLink, httpLink),
   cache: new InMemoryCache(),
 });
 
