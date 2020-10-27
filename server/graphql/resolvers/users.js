@@ -91,7 +91,7 @@ module.exports = {
       if (!match) {
         errors.general = ['Wrong credentials'];
         errors.password = errors.password || [];
-        errors.password.push('Wrong credentials')
+        errors.password.push('Wrong credentials');
         throw new UserInputError('Wrong credentials', { errors });
       }
 
