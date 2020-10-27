@@ -1,22 +1,23 @@
-import { gql } from '@apollo/client';
+/* eslint-disable import/prefer-default-export */
+import { gql } from "@apollo/client";
 
 export const FETCH_POSTS_QUERY = gql`
-    {
-        getPosts {
-            id
-            body
-            createdAt
-            username
-            likesCount
-            likes {
-                username
-            }
-            commentsCount
-            comments {
-                id
-                username
-                createdAt
-            }
-        }
+  {
+    getPosts {
+      id
+      body
+      createdAt
+      username
+      likesCount
+      likes {
+        username
+      }
+      commentsCount
+      comments {
+        id
+        username
+        createdAt
+      }
     }
+  }
 `;

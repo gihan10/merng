@@ -1,20 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "antd/dist/antd.css";
-import { Layout } from 'antd';
+import { Layout } from "antd";
 
-import './App.css';
+import "./App.css";
 
-import { AuthProvider } from './context/auth';
+import { AuthProvider } from "./context/Auth";
 
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
-import SinglePost from './components/SinglePost';
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import SinglePost from "./components/SinglePost";
 
-import MenuBar from './components/MenuBar';
+import MenuBar from "./components/MenuBar";
 
-import AuthRoute from './components/AuthRoute';
+import AuthRoute from "./components/AuthRoute";
 
 const { Content } = Layout;
 
@@ -31,7 +31,7 @@ function App() {
               margin: 0,
               minHeight: 280,
             }}
-            >
+          >
             <Route exact path="/" component={Home} />
             <AuthRoute exact path="/login" component={Login} />
             <AuthRoute exact path="/register" component={Register} />
