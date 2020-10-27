@@ -61,7 +61,7 @@ module.exports = {
       });
 
       const result = await newUser.save();
-      const token = generateToken(result, secretKey);
+      const token = generateToken(result, process.env.secretKey);
 
       return {
         ...result._doc,
