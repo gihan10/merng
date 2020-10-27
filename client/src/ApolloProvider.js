@@ -32,7 +32,7 @@ const errorLink = onError(({ networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:5000",
+  uri: process.env.REACT_APP_SERVER_URI,
 });
 
 const client = new ApolloClient({

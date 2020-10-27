@@ -1,7 +1,7 @@
 const { ApolloServer, PubSub } = require('apollo-server');
 const mongoose = require('mongoose');
 
-const { mongodb } = require('./config');
+const { mongodb, port } = require('./config');
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
@@ -17,7 +17,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => server.listen({ port: 5000 }))
+  .then(() => server.listen({ port }))
   .then((res) => {
     console.log(`server is running at ${res.url}`);
   });
