@@ -1,0 +1,25 @@
+version: 2.1
+jobs:
+  client:
+    docker:
+      - image: 'cimg/node:14.14.0'
+    steps:
+      - checkout
+      - run: cd client && npm i
+      - run: cd client && npm run lint
+      - run: cd client && npm run build
+  server:
+    docker:
+      - image: 'cimg/node:14.14.0'
+    steps:
+      - checkout
+      - run: cd server && npm i
+      - run: cd server && npm run lint
+
+workflows:
+  node-tests:
+    jobs:
+      - client
+      - server
+
+
