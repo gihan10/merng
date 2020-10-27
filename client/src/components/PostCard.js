@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Comment } from 'antd';
+import { Comment, Card, Popover } from 'antd';
 import { UserOutlined, CommentOutlined } from '@ant-design/icons';
 import { AuthContext } from '../context/auth';
 import DeletePostButton from './DeletePostButton';
@@ -19,12 +19,14 @@ function PostCard(props) {
     const actions = [
         <>
             <LikeButton user={user} post={{ id, likesCount, likes }} />
-            <span onClick={comment}>
-                <HashLink to={`/post/${id}#comments`}>
-                <CommentOutlined />
-                {' '}<span className="comment-action">{commentsCount}</span>
-                </HashLink>
-            </span>
+            <Popover content="Comment">
+                <span onClick={comment}>
+                    <HashLink to={`/post/${id}#comments`}>
+                    <CommentOutlined />
+                    {' '}<span className="comment-action">{commentsCount}</span>
+                    </HashLink>
+                </span>
+            </Popover>
             { user && user.username === username && (
                 <DeletePostButton post={post} />
             )}
@@ -32,19 +34,21 @@ function PostCard(props) {
     ]
 
     return (
-        <Comment
-            avatar={<UserOutlined style={{ fontSize: '26px', borderRadius: '20px', padding: '10px', backgroundColor: '#fde3cf' }} />}
-            actions={actions}
-            author={username}
-            content={
-                <>
-                    <Link to={`/post/${id}`}>{body}</Link>
-                </>
-            }
-            datetime={
-                <span>{createdAt}</span>
-            }
-        />
+        <Card>
+            <Comment
+                avatar={<UserOutlined style={{ fontSize: '26px', borderRadius: '20px', padding: '10px', backgroundColor: '#fde3cf' }} />}
+                actions={actions}
+                author={username}
+                content={
+                    <>
+                        <Link to={`/post/${id}`}>{body}</Link>
+                    </>
+                }
+                datetime={
+                    <span>{createdAt}</span>
+                }
+                />
+        </Card>
     );
 }
 

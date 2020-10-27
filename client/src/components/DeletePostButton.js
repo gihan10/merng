@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal, Popover } from 'antd';
 import { DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { gql, useMutation } from '@apollo/client';
 
@@ -36,9 +36,11 @@ function DeletePostButton({ post, callback }) {
     }
 
     return (
-        <span onClick={onClick}>
-            <DeleteOutlined />
-        </span>
+        <Popover content="Delete post">
+            <span onClick={onClick}>
+                <DeleteOutlined />
+            </span>
+        </Popover>
     );
 }
 

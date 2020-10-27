@@ -1,5 +1,5 @@
 import React, { createElement, useEffect, useState } from 'react';
-import { Modal } from 'antd';
+import { Modal, Popover } from 'antd';
 import { LikeFilled, LikeOutlined } from '@ant-design/icons';
 import { useMutation, gql } from '@apollo/client'
 
@@ -42,10 +42,12 @@ function LikeButton({user, post: { id, likes, likesCount }}) {
         });
     }
     return (
-        <span onClick={onClick}>
-            {createElement(liked ? LikeFilled : LikeOutlined)}
-            {' '}<span className="comment-action">{likesCount}</span>
-        </span>
+        <Popover content="Like">
+            <span onClick={onClick}>
+                {createElement(liked ? LikeFilled : LikeOutlined)}
+                {' '}<span className="comment-action">{likesCount}</span>
+            </span>
+        </Popover>
     );
 }
 

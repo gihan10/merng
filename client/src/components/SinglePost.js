@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { useParams, useHistory } from "react-router-dom";
-import { Card, Comment } from "antd";
+import { Card, Comment, Popover } from "antd";
 import { UserOutlined, CommentOutlined } from "@ant-design/icons";
 import { AuthContext } from "../context/auth";
 import DeletePostButton from "./DeletePostButton";
@@ -34,7 +34,11 @@ function SinglePost() {
     const actions = [];
 
     if (user && user.username === comment.username) {
-        actions.push(<DeleteCommentButton post={post} comment={comment} key="delete" />);
+        actions.push(
+            <Popover content="Delete comment" key="delete">
+                <DeleteCommentButton post={post} comment={comment} />
+            </Popover>
+        );
     }
     return actions;
   };
@@ -43,14 +47,16 @@ function SinglePost() {
   // is post owner logged in?
   if (user && user.username === post.username) {
     actions.push(
-      <DeletePostButton
-        key="setting"
-        post={post}
-        callback={() => {
-          // redirect to home page after deletion
-          history.push("/");
-        }}
-      />
+        <Popover content="Delete post">
+            <DeletePostButton
+                key="setting"
+                post={post}
+                callback={() => {
+                // redirect to home page after deletion
+                history.push("/");
+                }}
+            />
+        </Popover>
     );
   }
 
@@ -58,6 +64,7 @@ function SinglePost() {
     <>
       <Card actions={actions}>
         <Meta
+          title={post.body}
           avatar={
             <UserOutlined
               style={{
@@ -69,10 +76,15 @@ function SinglePost() {
             />
           }
         />
-        <div>{post.body}</div>
+        <div>{post.username} <small>({post.createdAt})</small></div>
         <div>
-          <LikeButton user={user} post={post} /> <CommentOutlined />{" "}
-          {post.commentsCount}
+            <Popover content="Likes">
+                <LikeButton user={user} post={post} />
+            </Popover>
+            {' '}
+            <Popover content="Comments">
+                <CommentOutlined /> {post.commentsCount}
+            </Popover>
         </div>
         <h3 style={{ marginTop: "2rem" }} id="comments">Comments ({post.commentsCount})</h3>
         {user && <CommentForm postId={postId} />}
