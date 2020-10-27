@@ -6,6 +6,8 @@ A simple tweet application to demonstrate and exercise #MERNG stack. Authorized 
 
 [![gihan10](https://circleci.com/gh/gihan10/merng.svg?style=shield)](https://circleci.com/gh/gihan10/merng)
 
+![Build](https://github.com/gihan10/merng/workflows/Node.js%20CI/badge.svg)
+
 ## Code style
 
 This project follows `airbnb` Javascript coding styles. https://github.com/airbnb/javascript
