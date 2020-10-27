@@ -24,7 +24,7 @@ function DeletePostButton({ post, callback }) {
         Modal.confirm({
             title: 'Confirm',
             icon: <ExclamationCircleOutlined />,
-            content: 'Are you sure you want to delete this post?',
+            content: 'Are you sure you want to delete this post and all it\'s comments?',
             onOk: () => {
                 deletePost({
                     variables: {
