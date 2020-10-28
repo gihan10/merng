@@ -18,7 +18,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => server.listen({ port: process.env.port }))
+  .then(() => server.listen({ port: process.env.PORT }))
   .then((res) => {
     // eslint-disable-next-line no-console
     console.log(`server is running at ${res.url}`);
