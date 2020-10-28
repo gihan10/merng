@@ -8,9 +8,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "node index",
+    "start": "node index",
     "lint": "eslint .",
-    "start": "nodemon --config ./nodemon.json index"
+    "dev": "nodemon --config ./nodemon.json index"
   },
   "keywords": [],
   "author": "",
