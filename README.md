@@ -8,6 +8,8 @@ A simple tweet application to demonstrate and exercise #MERNG stack. Authorized 
 
 ![Build](https://github.com/gihan10/merng/workflows/Node.js%20CI/badge.svg)
 
+![Deps](https://img.shields.io/depfu/gihan10/merng)
+
 ## Code style
 
 This project follows `airbnb` Javascript coding styles. https://github.com/airbnb/javascript
