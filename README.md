@@ -4,11 +4,11 @@ A simple tweet application to demonstrate and exercise #MERNG stack. Authorized 
 
 ## Build status
 
-[![gihan10](https://circleci.com/gh/gihan10/merng.svg?style=shield)](https://circleci.com/gh/gihan10/merng)
+[![gihan9a](https://circleci.com/gh/gihan9a/merng.svg?style=shield)](https://circleci.com/gh/gihan9a/merng)
 
-![Build](https://github.com/gihan10/merng/workflows/Node.js%20CI/badge.svg)
+![Build](https://github.com/gihan9a/merng/workflows/Node.js%20CI/badge.svg)
 
-![Deps](https://img.shields.io/depfu/gihan10/merng)
+![Deps](https://img.shields.io/depfu/gihan9a/merng)
 
 ## Code style
 
